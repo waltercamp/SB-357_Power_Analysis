@@ -91,15 +91,16 @@ ggplot(power_results_stops,
   ggtitle("Power with Different Sample Sizes")
 
 ## Simulation power estimate - Neighborhood Level
-#NOTE: We assume 512 treatment block groups and 4,608 comparison 
-#block groups measured monthly. We assume a starting level
+#NOTE: We assume 6,327 treatment blocks and 6,327 comparison 
+#blocks measured monthly. We assume a starting level
 #of crime 62.23 crimes with a standard deviation of 8.37.
 #We assume crime will increase by 1 per year. 
-#We also vary this slightly. To match existing research, we use an OLS 
+#We also vary this slightly, assuming smaller and smaller changes. 
+#To match existing research, we use an OLS 
 #model with outcomes as a rate; although for the full 
 #study we will explore whether a Poisson-based model is a better fit and
 #if invited for the full proposal, will attempt to model that in this power
-#analysis. Also, rather than look at an annual average, we will explore
+#analysis. Also, rather than look at an average, we will explore
 #power analyses that allow for yearly rates and account for clustering. 
 #Limited reseach in this area makes these sorts of power analysis models
 #difficult to use.
@@ -133,14 +134,14 @@ my_power_function_2 <- function(changetry, sample_sizetx1, sample_sizetx2, sampl
 }
 
 #Try different changes
-changetry <- c(1.75, 2.0, 2.25, 2.5)
+changetry <- c(1, 0.9, 0.8, 0.7, 0.6)
 
 #Store the findings 
 power_levels_neighs <- c()
 
 #Run
-for (i in 1:4) {
-  power_levels_neighs[i] <- my_power_function_2(changetry[i], 512, 512, 4608, 4608)
+for (i in 1:5) {
+  power_levels_neighs[i] <- my_power_function_2(changetry[i], 6327, 6327, 6327, 6327)
 }
 power_levels_neighs
 
